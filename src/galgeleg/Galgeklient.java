@@ -1,18 +1,6 @@
 package galgeleg;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -20,7 +8,6 @@ import javax.xml.ws.Service;
 public class Galgeklient{
 	
 	public static void main(String[] arg) throws Exception {
-		String brugernavn;
 		//URL url = new URL("http://ubuntu4.saluton.dk:9924/galgeleg?wsdl");
 		URL url = new URL("http://localhost:9924/galgelegtjeneste?wsdl");
 		QName qname = new QName("http://galgeleg/", "GalgelogikService");
@@ -28,10 +15,7 @@ public class Galgeklient{
 		boolean spilAktivt = false;
 
 		GalgeI spil = service.getPort(GalgeI.class);
-		GalgeGUI GUI = new GalgeGUI(spil);
 
-		//spil.nulstil();
-		//spil.hentOrdFraDr();
 
 		Scanner scanner = new Scanner(System.in);
 
@@ -51,16 +35,6 @@ public class Galgeklient{
 		 	}
 		 else
 		 System.out.println("Forkert login - prøv igen");
-		 
-
-		//GUI.GUI();
-
-		//while (GUI.login() == false) {
-
-			//Thread.sleep(100);  
-			 
-			  
-		//)}
 
 		while (spilAktivt) {
 			System.out.println("Gæt ordet: " + spil.getSynligtOrd(bruger));
@@ -78,7 +52,7 @@ public class Galgeklient{
 						if (spil.erSpilletVundet(bruger) == true) {
 							System.out.println("Du har vundet, ordet var: " + spil.getOrdet(bruger));
 							spil.nulstil(bruger);
-							spil.highscoreCheck(GUI.getBruger(), spil.getAntalForkerteBogstaver(bruger));
+							spil.highscoreCheck(bruger, spil.getAntalForkerteBogstaver(bruger));
 						}
 					} else {
 
@@ -86,8 +60,7 @@ public class Galgeklient{
 							System.out.println("Du har gættet forkert for mange gange, du har tabt.");
 							System.out.println("Ordet var: " + spil.getOrdet(bruger));
 							spil.nulstil(bruger);
-							String user = GUI.getBruger();
-							System.out.println("User: " + user);
+							System.out.println("User: " + bruger);
 						}
 					}
 				}
