@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://ws.cdyne.com/ip2geo/ip2geo.asmx?WSDL" uri="xml-resources/web-service-references/ip2geo/wsdl/ws.cdyne.com/ip2geo/ip2geo.asmx.wsdl"/>
-</catalog>
