@@ -36,7 +36,6 @@ public class Galgeklient {
             System.out.println("Velkommen " + bruger);
             spil.nulstil(bruger);
             spil.getHighscores();
-            System.out.println(Arrays.toString(spil.getHighscores()));
             break;
         } else {
             System.out.println("Forkert login - prøv igen");
