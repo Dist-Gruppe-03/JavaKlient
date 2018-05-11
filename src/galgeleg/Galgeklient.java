@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+
 public class Galgeklient {
 
     public static void main(String[] arg) throws Exception {
