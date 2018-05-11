@@ -1,6 +1,7 @@
 package galgeleg;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Scanner;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -34,6 +35,8 @@ public class Galgeklient {
             bruger = brugernavn;
             System.out.println("Velkommen " + bruger);
             spil.nulstil(bruger);
+            spil.getHighscores();
+            System.out.println(Arrays.toString(spil.getHighscores()));
             break;
         } else {
             System.out.println("Forkert login - prøv igen");

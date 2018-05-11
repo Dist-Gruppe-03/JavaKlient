@@ -43,4 +43,6 @@ public interface GalgeI extends java.rmi.Remote {
     @WebMethod public String getName(String username) throws java.rmi.RemoteException, ClassNotFoundException, SQLException;
     
     @WebMethod public int getPersonalHighscore(String username) throws RemoteException, ClassNotFoundException, SQLException;
+    
+     @WebMethod public String[] getHighscores() throws java.rmi.RemoteException;
 }
