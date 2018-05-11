@@ -13,7 +13,8 @@ public class Galgeklient {
         URL url = new URL("http://localhost:9924/galgelegtjeneste?wsdl");
         QName qname = new QName("http://galgeleg/", "GalgelogikService");
         Service service = Service.create(url, qname);
-        boolean spilAktivt = false;
+        boolean spilAktivt = true;
+        String bruger;
 
         GalgeI spil = service.getPort(GalgeI.class);
 
@@ -21,19 +22,22 @@ public class Galgeklient {
 
         System.out.println("Velkommen til galgeleg.");
         System.out.println("Log ind for at spille");
-
+        
+        while(true) {
         System.out.println("Indtast brugernavn: ");
-        String bruger = scanner.nextLine();
+        String brugernavn = scanner.nextLine();
 
         System.out.println("Indtast password: ");
         String password = scanner.nextLine();
-
-        if (spil.hentBruger(bruger, password)) {
+        
+        if (spil.hentBruger(brugernavn, password)) {
+            bruger = brugernavn;
             System.out.println("Velkommen " + bruger);
-            spilAktivt = true;
             spil.nulstil(bruger);
+            break;
         } else {
             System.out.println("Forkert login - prøv igen");
+        }
         }
 
         while (spilAktivt) {
@@ -48,7 +52,7 @@ public class Galgeklient {
                 } else {
                     spil.gætBogstav(bogstav, bruger);
                     if (spil.erSidsteBogstavKorrekt(bruger)) {
-
+                        System.out.println("korrekt "+bogstav+ " var en del af ordet.");
                         if (spil.erSpilletVundet(bruger) == true) {
                             System.out.println("Du har vundet, ordet var: " + spil.getOrdet(bruger));
 
@@ -57,7 +61,7 @@ public class Galgeklient {
                             System.out.println("Vil du spille igen? skriv Y");
                             bogstav = scanner.next();
                             System.out.println(bogstav);
-                            if (bogstav.equals("Y")) {
+                            if (bogstav.equals("Y") ||bogstav.equals("y")) {
                                 System.out.println("Nyt spil starter");
                                 spil.nulstil(bruger);
                             } else {
