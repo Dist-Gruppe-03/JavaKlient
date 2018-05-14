@@ -9,8 +9,8 @@ import javax.xml.ws.Service;
 public class Galgeklient {
 
     public static void main(String[] arg) throws Exception {
-        //URL url = new URL("http://ubuntu4.saluton.dk:9924/galgeleg?wsdl");
-        URL url = new URL("http://localhost:9924/galgelegtjeneste?wsdl");
+        URL url = new URL("http://ubuntu4.saluton.dk:9944/galgeleg?wsdl");
+        //URL url = new URL("http://localhost:9944/galgelegtjeneste?wsdl");
         QName qname = new QName("http://galgeleg/", "GalgelogikService");
         Service service = Service.create(url, qname);
         boolean spilAktivt = true;
@@ -76,12 +76,10 @@ public class Galgeklient {
                             System.out.println("Du har gættet forkert for mange gange, du har tabt.");
                             System.out.println("Ordet var: " + spil.getOrdet(bruger));
 
-                            System.out.println("User: " + bruger);
-
                             System.out.println("Vil du spille igen? skriv Y");
                             bogstav = scanner.next();
                             System.out.println(bogstav);
-                            if (bogstav.equals("Y")) {
+                            if (bogstav.equals("Y") || bogstav.equals("y")) {
                                 System.out.println("Nyt spil starter");
                                 spil.nulstil(bruger);
                             } else {
